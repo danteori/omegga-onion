@@ -28,6 +28,8 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
     });
     */
 
+    const sleep = (time: number) => new Promise(resolve => setTimeout(resolve, time));
+
     this.omegga.on('cmd:onion',
     async (speaker: string, subcommand: string, ...args: string[]) => {
         if(Omegga.getPlayer(speaker).isHost()){
@@ -43,6 +45,13 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             for(const p of Omegga.players){
               Omegga.middlePrint(p, message);
             }
+          }
+          if(subcommand == 'godark'){
+            Omegga.saveEnvironment("godarktemp");
+            Omegga.middlePrint(player, "A");
+            await sleep(1000);
+            Omegga.middlePrint(player, "B");
+            
           }
         }
     });
