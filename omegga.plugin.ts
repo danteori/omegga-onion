@@ -54,7 +54,7 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             Omegga.loadEnvironment("godark");
             await sleep(1000);
             MidAll(message);
-            await sleep(4000);
+            await sleep(6000);
             Omegga.loadEnvironment("godarktemp");
           }
         }
