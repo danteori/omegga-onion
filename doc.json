@@ -1,0 +1,32 @@
+{
+  "name": "onion",
+  "description": "A typed safe Omegga plugin.",
+  "author": "orion",
+  "config": {},
+  "commands": [
+    {
+      "name": "!saveenv",
+      "description": "Saves the current environment preset",
+      "example": "!saveenv testEnvironment",
+      "args": [
+        {
+          "name": "name",
+          "description": "Name of the environment",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "!loadenv",
+      "description": "Loads an environment preset",
+      "example": "!loadenv testEnvironment",
+      "args": [
+        {
+          "name": "name",
+          "description": "Name of the environment",
+          "required": false
+        }
+      ]
+    }
+  ]
+}
