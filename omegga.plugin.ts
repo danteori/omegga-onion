@@ -46,11 +46,16 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
           }
           if(subcommand == 'godark'){
             Omegga.saveEnvironment("godarktemp");
+            Omegga.loadEnvironment("godark");
             Omegga.middlePrint(player, "A");
             await sleep(5000);
             Omegga.loadEnvironment("godarktemp");
             Omegga.middlePrint(player, "B");
             
+          }
+          if(subcommand == 'saveenv'){
+            const filename = args.join(' ');
+            Omegga.saveEnvironment(filename);
           }
         }
     });
