@@ -65,6 +65,15 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             await sleep(6000);
             Omegga.loadEnvironment("golighttemp");
           }
+          if(subcommand == 'pmsg'){
+            const message = args.join(' ');
+            Omegga.saveEnvironment("gopisstemp");
+            Omegga.loadEnvironment("gopiss");
+            await sleep(1000);
+            MidAll(message);
+            await sleep(6000);
+            Omegga.loadEnvironment("gopisstemp");
+          }
         }
     });
 
