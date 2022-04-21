@@ -34,7 +34,6 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
     async (speaker: string, subcommand: string, ...args: string[]) => {
         if(Omegga.getPlayer(speaker).isHost()){
           const player = this.omegga.getPlayer(speaker);
-          Omegga.middlePrint(player, "Command attempted by player " + player);
           if(subcommand == 'kill') {
             const target = args.join(' ');
             Omegga.middlePrint(player, "Kill command attempted on player " + target);
@@ -56,6 +55,15 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             MidAll(message);
             await sleep(6000);
             Omegga.loadEnvironment("godarktemp");
+          }
+          if(subcommand == 'lmsg'){
+            const message = args.join(' ');
+            Omegga.saveEnvironment("golighttemp");
+            Omegga.loadEnvironment("golight");
+            await sleep(1000);
+            MidAll(message);
+            await sleep(6000);
+            Omegga.loadEnvironment("golighttemp");
           }
         }
     });
