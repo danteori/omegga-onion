@@ -38,6 +38,12 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             Omegga.middlePrint(player, "Kill command attempted on player " + target);
             this.omegga.findPlayerByName(target).kill;
           }
+          if(subcommand == 'midall'){
+            const message = args.join(' ');
+            for(const p of Omegga.players){
+              Omegga.middlePrint(p, message);
+            }
+          }
         }
     });
     
