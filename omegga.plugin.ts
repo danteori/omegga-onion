@@ -38,26 +38,33 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
           if(subcommand == 'kill') {
             const target = args.join(' ');
             Omegga.middlePrint(player, "Kill command attempted on player " + target);
-            this.omegga.findPlayerByName(target).kill;
+            Omegga.findPlayerByName(target).kill();
           }
           if(subcommand == 'midall'){
             const message = args.join(' ');
-            for(const p of Omegga.players){
-              Omegga.middlePrint(p, message);
-            }
+            MidAll(message);
           }
           if(subcommand == 'godark'){
             Omegga.saveEnvironment("godarktemp");
             Omegga.middlePrint(player, "A");
-            await sleep(1000);
+            await sleep(5000);
+            Omegga.loadEnvironment("godarktemp");
             Omegga.middlePrint(player, "B");
             
           }
         }
     });
+
+    const MidAll = (message: string) => {
+      for(const p of Omegga.players){
+        Omegga.middlePrint(p, message);
+      }
+    }
     
     return { registeredCommands: ['onion'] };
   }
+
+  
 
   async stop() {
     // Anything that needs to be cleaned up...
