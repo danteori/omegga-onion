@@ -30,8 +30,13 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
 
     const sleep = (time: number) => new Promise(resolve => setTimeout(resolve, time));
 
+    //await this.store.set("bar", "e"); 
+    //store.set("duelOffers", []);
     this.omegga.on('cmd:onion',
     async (speaker: string, subcommand: string, ...args: string[]) => {
+        if(subcommand == 'accept'){
+          //start duel
+        }
         if(Omegga.getPlayer(speaker).isHost()){
           const player = this.omegga.getPlayer(speaker);
           if(subcommand == 'kill') {
@@ -74,12 +79,26 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             await sleep(6000);
             Omegga.loadEnvironment("gopisstemp");
           }
+          if(subcommand == 'duelinit'){
+            Omegga.saveMinigame(parseInt(args[0]), "onionduel");
+          }
           if(subcommand == 'duel'){
-            const target = args[0];
-            Omegga.middlePrint(player, target);
+            const target = Omegga.findPlayerByName(args[0]);
+            Omegga.middlePrint(player, "You are now dueling " + target.name);
+            //await this.store.set("duel")
+            Omegga.middlePrint(target, player.name + " is now dueling you.");
+            Omegga.loadMinigame("onionduel", player.name);
+          }
+          if(subcommand == 'giveweapon'){
+            player.giveItem(args[0]);
+            Omegga.middlePrint(player, "Gave weapon " + args[0] + " to player " + player.name);
           }
         }
     });
+
+    const StartDuel = (player1: object, player2: object) => {
+
+    }
 
     const MidAll = (message: string) => {
       for(const p of Omegga.players){
