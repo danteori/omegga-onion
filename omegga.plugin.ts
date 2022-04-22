@@ -34,6 +34,7 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
     //await this.store.set("bar", "e"); 
     //store.set("duelOffers", []);
     this.omegga.on('join', async (player) => {
+      console.log('eeeeeeeee eeeeeeeee')
       if(player.isHost){
         console.log("Boot attempted.");
         Omegga.loadMinigame('temp', player.id);
