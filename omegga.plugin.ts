@@ -44,7 +44,7 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             Omegga.middlePrint(player, "Kill command attempted on player " + target);
             Omegga.findPlayerByName(target).kill();
           }
-          if(subcommand == 'midall'){
+          if(subcommand == 'mid'){
             const message = args.join(' ');
             MidAll(message);
           }
@@ -61,31 +61,43 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             await sleep(6000);
             Omegga.loadEnvironment("godarktemp");
           }
-          if(subcommand == 'listminigames'){
+          if(subcommand == 'listm'){
             let minis = await Omegga.listMinigames();
             for(const m of minis){
               console.log(`${m.index.toString()} ${m.name}`);
             }
           }
-          if(subcommand == 'saveminigame'){
+          if(subcommand == 'savemini'){
             Omegga.saveMinigame(parseInt(args[0]), args[1]);
           }
-          if(subcommand == 'loadminigame'){
+          if(subcommand == 'loadmini'){
             Omegga.loadMinigame(args[0], player.id);
           }
-          if(subcommand == 'loadminigameowner'){
+          if(subcommand == 'bootmini'){
+            const target = Omegga.findPlayerByName(args[1]);
+            let pos = await target.getPosition();
+
+            Omegga.loadMinigame(args[0], target.id);
+            let minis = await Omegga.listMinigames();
+            for(const m of minis){
+              if(m.owner.name = target.name){
+                Omegga.deleteMinigame(m.index)
+              }
+            }
+            Omegga.writeln(`Chat.Command /TP "${target.name}" ${pos[0].toString()} ${pos[1].toString()} ${pos[2].toString()} 1`)
+          }
+          if(subcommand == 'loadminio'){
             const target = Omegga.findPlayerByName(args[1]);
             let pos = await target.getPosition();
             Omegga.middlePrint(player, pos.toString());
             Omegga.loadMinigame(args[0], target.id);
-            console.log(`Chat.Command /TP "${target.name}" ${pos[0].toString()} ${pos[1].toString()} ${pos[2].toString()} 1`);
             Omegga.writeln(`Chat.Command /TP "${target.name}" ${pos[0].toString()} ${pos[1].toString()} ${pos[2].toString()} 1`)
           }
-          if(subcommand == 'replaceminigame'){
+          if(subcommand == 'replacemini'){
             Omegga.deleteMinigame(0);
             Omegga.loadMinigame(args[0], player.id);
           }
-          if(subcommand == 'deleteminigame'){
+          if(subcommand == 'deletemini'){
             Omegga.deleteMinigame(parseInt(args[0]));
           }
           if(subcommand == 'duel'){
@@ -96,7 +108,7 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             Omegga.loadMinigame("onionduel", player.name);
             Omegga.getMinigamePresets
           }
-          if(subcommand == 'giveweapon'){
+          if(subcommand == 'give'){
             player.giveItem(args[0]);
             Omegga.middlePrint(player, "Gave weapon " + args[0] + " to player " + player.name);
           }
