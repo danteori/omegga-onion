@@ -74,6 +74,10 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             await sleep(6000);
             Omegga.loadEnvironment("gopisstemp");
           }
+          if(subcommand == 'duel'){
+            const target = args[0];
+            Omegga.middlePrint(player, target);
+          }
         }
     });
 
