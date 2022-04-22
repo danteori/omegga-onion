@@ -85,6 +85,10 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
           if(subcommand == 'loadminigame'){
             Omegga.loadMinigame(args[0], player.id);
           }
+          if(subcommand == 'loadminigameowner'){
+            const target = Omegga.findPlayerByName(args[1]);
+            Omegga.loadMinigame(args[0], target.id);
+          }
           if(subcommand == 'replaceminigame'){
             Omegga.deleteMinigame(0);
             Omegga.loadMinigame(args[0], player.id);
