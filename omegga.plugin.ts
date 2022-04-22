@@ -81,6 +81,7 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             let minis = await Omegga.listMinigames();
             for(const m of minis){
               if(m.name == 'temp_todelete' && m.owner.name == target.name){
+                console.log(`Deleted minigame ${m.name} at index ${m.index} with owner ${m.owner.name}`);
                 Omegga.deleteMinigame(m.index)
               }
             }
