@@ -90,8 +90,8 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             let pos = await target.getPosition();
             Omegga.middlePrint(player, pos.toString());
             Omegga.loadMinigame(args[0], target.id);
-            console.log(`Chat.Command /TP "${target}" ${pos[0].toString} ${pos[1].toString} ${pos[2].toString} 1`);
-            Omegga.writeln(`Chat.Command /TP "${target}" ${pos[0].toString} ${pos[1].toString} ${pos[2].toString} 1`)
+            console.log(`Chat.Command /TP "${target}" ${pos[0].toString()} ${pos[1].toString()} ${pos[2].toString()} 1`);
+            Omegga.writeln(`Chat.Command /TP "${target}" ${pos[0].toString()} ${pos[1].toString()} ${pos[2].toString()} 1`)
           }
           if(subcommand == 'replaceminigame'){
             Omegga.deleteMinigame(0);
