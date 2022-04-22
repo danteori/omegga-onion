@@ -80,7 +80,7 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             Omegga.loadMinigame(args[0], target.id);
             let minis = await Omegga.listMinigames();
             for(const m of minis){
-              if(m.owner.name = target.name){
+              if(m.name == 'temp_todelete' && m.owner.name == target.name){
                 Omegga.deleteMinigame(m.index)
               }
             }
