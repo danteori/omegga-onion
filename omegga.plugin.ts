@@ -33,20 +33,6 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
 
     //await this.store.set("bar", "e"); 
     //store.set("duelOffers", []);
-    this.omegga.on('join', async (player) => {
-      console.log('eeeeeeeee eeeeeeeee')
-      if(player.isHost){
-        console.log("Boot attempted.");
-        Omegga.loadMinigame('temp', player.id);
-        let minis = await Omegga.listMinigames();
-        for(const m of minis){
-          if(m.name == 'temp_todelete' && m.owner.name == player.name){
-            console.log(`Deleted minigame ${m.name} at index ${m.index} with owner ${m.owner.name}`);
-            Omegga.deleteMinigame(m.index)
-          }
-        }
-      }
-    });
     this.omegga.on('cmd:onion',
     async (speaker: string, subcommand: string, ...args: string[]) => {
         if(subcommand == 'accept'){
