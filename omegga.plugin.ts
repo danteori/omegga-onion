@@ -79,8 +79,11 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             await sleep(6000);
             Omegga.loadEnvironment("gopisstemp");
           }
-          if(subcommand == 'duelinit'){
-            Omegga.saveMinigame(parseInt(args[0]), "onionduel");
+          if(subcommand == 'saveminigame'){
+            Omegga.saveMinigame(parseInt(args[0]), args[1]);
+          }
+          if(subcommand == 'loadminigame'){
+            Omegga.loadMinigame(args[0], args[1]);
           }
           if(subcommand == 'duel'){
             const target = Omegga.findPlayerByName(args[0]);
@@ -88,6 +91,7 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             //await this.store.set("duel")
             Omegga.middlePrint(target, player.name + " is now dueling you.");
             Omegga.loadMinigame("onionduel", player.name);
+            Omegga.getMinigamePresets
           }
           if(subcommand == 'giveweapon'){
             player.giveItem(args[0]);
