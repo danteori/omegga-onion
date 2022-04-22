@@ -89,6 +89,9 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             Omegga.deleteMinigame(0);
             Omegga.loadMinigame(args[0], player.id);
           }
+          if(subcommand == 'deleteminigame'){
+            Omegga.deleteMinigame(0);
+          }
           if(subcommand == 'duel'){
             const target = Omegga.findPlayerByName(args[0]);
             Omegga.middlePrint(player, "You are now dueling " + target.name);
