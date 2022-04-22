@@ -83,7 +83,7 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             Omegga.saveMinigame(parseInt(args[0]), args[1]);
           }
           if(subcommand == 'loadminigame'){
-            Omegga.loadMinigame(args[0], args[1]);
+            Omegga.loadMinigame(args[0], player.id);
           }
           if(subcommand == 'duel'){
             const target = Omegga.findPlayerByName(args[0]);
