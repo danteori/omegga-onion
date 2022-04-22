@@ -61,23 +61,11 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             await sleep(6000);
             Omegga.loadEnvironment("godarktemp");
           }
-          if(subcommand == 'lmsg'){
-            const message = args.join(' ');
-            Omegga.saveEnvironment("golighttemp");
-            Omegga.loadEnvironment("golight");
-            await sleep(1000);
-            MidAll(message);
-            await sleep(6000);
-            Omegga.loadEnvironment("golighttemp");
-          }
-          if(subcommand == 'pmsg'){
-            const message = args.join(' ');
-            Omegga.saveEnvironment("gopisstemp");
-            Omegga.loadEnvironment("gopiss");
-            await sleep(1000);
-            MidAll(message);
-            await sleep(6000);
-            Omegga.loadEnvironment("gopisstemp");
+          if(subcommand == 'listminigames'){
+            let minis = await Omegga.listMinigames();
+            for(const m of minis){
+              console.log(`${m.index.toString()} ${m.name}`);
+            }
           }
           if(subcommand == 'saveminigame'){
             Omegga.saveMinigame(parseInt(args[0]), args[1]);
@@ -98,7 +86,7 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             Omegga.loadMinigame(args[0], player.id);
           }
           if(subcommand == 'deleteminigame'){
-            Omegga.deleteMinigame(0);
+            Omegga.deleteMinigame(parseInt(args[0]));
           }
           if(subcommand == 'duel'){
             const target = Omegga.findPlayerByName(args[0]);
