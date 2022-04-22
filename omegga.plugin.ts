@@ -1,5 +1,6 @@
 import OmeggaPlugin, { OL, PS, PC } from 'omegga';
 import chat from '../omegga/src/omegga/matchers/chat';
+import OmeggaPlayer from 'omegga';
 
 type Config = { foo: string };
 type Storage = { bar: string };
@@ -32,6 +33,18 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
 
     //await this.store.set("bar", "e"); 
     //store.set("duelOffers", []);
+    this.omegga.on('join', async (player) => {
+      if(player.isHost){
+            Omegga.loadMinigame('temp', player.id);
+            let minis = await Omegga.listMinigames();
+            for(const m of minis){
+              if(m.name == 'temp_todelete' && m.owner.name == player.name){
+                console.log(`Deleted minigame ${m.name} at index ${m.index} with owner ${m.owner.name}`);
+                Omegga.deleteMinigame(m.index)
+              }
+            }
+      }
+    });
     this.omegga.on('cmd:onion',
     async (speaker: string, subcommand: string, ...args: string[]) => {
         if(subcommand == 'accept'){
@@ -116,10 +129,6 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
         }
     });
 
-    const StartDuel = (player1: object, player2: object) => {
-
-    }
-
     const MidAll = (message: string) => {
       for(const p of Omegga.players){
         Omegga.middlePrint(p, message);
@@ -127,9 +136,7 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
     }
     
     return { registeredCommands: ['onion'] };
-  }
-
-  
+  }  
 
   async stop() {
     // Anything that needs to be cleaned up...
