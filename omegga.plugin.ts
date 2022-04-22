@@ -88,6 +88,7 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
           if(subcommand == 'loadminigameowner'){
             const target = Omegga.findPlayerByName(args[1]);
             let pos = await target.getPosition();
+            Omegga.middlePrint(player, pos.toString());
             Omegga.loadMinigame(args[0], target.id);
             Omegga.writeln(`Chat.Command /TP "${target}" ${pos.join(" ")} 1`)
             
