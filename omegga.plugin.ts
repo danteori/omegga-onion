@@ -114,6 +114,9 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             player.giveItem(args[0]);
             Omegga.middlePrint(player, "Gave weapon " + args[0] + " to player " + player.name);
           }
+          if(subcommand == 'e'){
+            MidAll("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee<br>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee<br>eeeeeeeeeeeeeeeeeeeee");
+          }
         }
     });
 
