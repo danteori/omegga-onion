@@ -31,6 +31,18 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
 
     const sleep = (time: number) => new Promise(resolve => setTimeout(resolve, time));
 
+    this.omegga.on('cmd:a',
+    async (speaker: string, sizeStr: string, ...args: string[]) => {
+        if(Omegga.getPlayer(speaker).isHost()){
+          const player = this.omegga.getPlayer(speaker);
+          const size = parseInt(sizeStr);
+          if(!isNaN(size)){
+            const message = args.join(' ');
+            Omegga.broadcast(`<size="${size}"><color="${player.getNameColor()}">${player.name}</color>: ${message}</size>`);
+          }
+        }
+      });
+
     //await this.store.set("bar", "e"); 
     //store.set("duelOffers", []);
     this.omegga.on('cmd:onion',
@@ -127,7 +139,7 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
       }
     }
     
-    return { registeredCommands: ['onion'] };
+    return { registeredCommands: ['onion', 'a'] };
   }  
 
   async stop() {
