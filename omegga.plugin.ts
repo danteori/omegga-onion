@@ -30,18 +30,28 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
     */
 
     const sleep = (time: number) => new Promise(resolve => setTimeout(resolve, time));
+    let fontSize = 25;
 
     this.omegga.on('cmd:a',
-    async (speaker: string, sizeStr: string, ...args: string[]) => {
+    async (speaker: string, ...args: string[]) => {
         if(Omegga.getPlayer(speaker).isHost()){
           const player = this.omegga.getPlayer(speaker);
-          const size = parseInt(sizeStr);
-          if(!isNaN(size)){
-            const message = args.join(' ');
-            Omegga.broadcast(`<size="${size}"><color="${player.getNameColor()}">${player.name}</color>: ${message}</size>`);
-          }
+          const message = args.join(' ');
+          Omegga.broadcast(`<size="${fontSize}"><color="${player.getNameColor()}"><b>${player.name}</b></color>: ${message}</size>`);
+          
         }
       });
+
+      this.omegga.on('cmd:asize',
+      async (speaker: string, sizeStr: string) => {
+          if(Omegga.getPlayer(speaker).isHost()){
+            let newSize = parseInt(sizeStr);
+            if(!isNaN(newSize)){
+              fontSize = newSize;
+              Omegga.whisper(speaker, `Announce font size set to ${newSize}.`);
+            }
+          }
+        });
 
     //await this.store.set("bar", "e"); 
     //store.set("duelOffers", []);
