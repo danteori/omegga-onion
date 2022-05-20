@@ -39,7 +39,7 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
           const player = this.omegga.getPlayer(speaker);
           if(subcommand == 'a'){
             const message = args.join(' ');
-            Omegga.broadcast(message);
+            Omegga.broadcast(`<size="100"><color="${player.getNameColor}">${player.name}</color>: ${message}</size>`);
           }
           else if(subcommand == 'kill') {
             const target = args.join(' ');
