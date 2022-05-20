@@ -35,25 +35,26 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
     //store.set("duelOffers", []);
     this.omegga.on('cmd:onion',
     async (speaker: string, subcommand: string, ...args: string[]) => {
-        if(subcommand == 'accept'){
-          //start duel
-        }
         if(Omegga.getPlayer(speaker).isHost()){
           const player = this.omegga.getPlayer(speaker);
-          if(subcommand == 'kill') {
+          if(subcommand == 'a'){
+            const message = args.join(' ');
+            Omegga.broadcast(message);
+          }
+          else if(subcommand == 'kill') {
             const target = args.join(' ');
             Omegga.middlePrint(player, "Kill command attempted on player " + target);
             Omegga.findPlayerByName(target).kill();
           }
-          if(subcommand == 'mid'){
+          else if(subcommand == 'mid'){
             const message = args.join(' ');
             MidAll(message);
           }
-          if(subcommand == 'saveenv'){
+          else if(subcommand == 'saveenv'){
             const filename = args.join(' ');
             Omegga.saveEnvironment(filename);
           }
-          if(subcommand == 'dmsg'){
+          else if(subcommand == 'dmsg'){
             const message = args.join(' ');
             Omegga.saveEnvironment("godarktemp");
             Omegga.loadEnvironment("godark");
@@ -62,19 +63,19 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             await sleep(6000);
             Omegga.loadEnvironment("godarktemp");
           }
-          if(subcommand == 'listm'){
+          else if(subcommand == 'listm'){
             let minis = await Omegga.listMinigames();
             for(const m of minis){
               console.log(`${m.index.toString()} ${m.name}`);
             }
           }
-          if(subcommand == 'savemini'){
+          else if(subcommand == 'savemini'){
             Omegga.saveMinigame(parseInt(args[0]), args[1]);
           }
-          if(subcommand == 'loadmini'){
+          else if(subcommand == 'loadmini'){
             Omegga.loadMinigame(args[0], player.id);
           }
-          if(subcommand == 'bootmini'){
+          else if(subcommand == 'bootmini'){
             const target = Omegga.findPlayerByName(args[1]);
             let pos = await target.getPosition();
 
@@ -88,21 +89,21 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             }
             Omegga.writeln(`Chat.Command /TP "${target.name}" ${pos[0].toString()} ${pos[1].toString()} ${pos[2].toString()} 1`)
           }
-          if(subcommand == 'loadminio'){
+          else if(subcommand == 'loadminio'){
             const target = Omegga.findPlayerByName(args[1]);
             let pos = await target.getPosition();
             Omegga.middlePrint(player, pos.toString());
             Omegga.loadMinigame(args[0], target.id);
             Omegga.writeln(`Chat.Command /TP "${target.name}" ${pos[0].toString()} ${pos[1].toString()} ${pos[2].toString()} 1`)
           }
-          if(subcommand == 'replacemini'){
+          else if(subcommand == 'replacemini'){
             Omegga.deleteMinigame(0);
             Omegga.loadMinigame(args[0], player.id);
           }
-          if(subcommand == 'deletemini'){
+          else if(subcommand == 'deletemini'){
             Omegga.deleteMinigame(parseInt(args[0]));
           }
-          if(subcommand == 'duel'){
+          else if(subcommand == 'duel'){
             const target = Omegga.findPlayerByName(args[0]);
             Omegga.middlePrint(player, "You are now dueling " + target.name);
             //await this.store.set("duel")
@@ -110,11 +111,11 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
             Omegga.loadMinigame("onionduel", player.name);
             Omegga.getMinigamePresets
           }
-          if(subcommand == 'give'){
+          else if(subcommand == 'give'){
             player.giveItem(args[0]);
             Omegga.middlePrint(player, "Gave weapon " + args[0] + " to player " + player.name);
           }
-          if(subcommand == 'e'){
+          else if(subcommand == 'e'){
             MidAll("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee<br>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee<br>eeeeeeeeeeeeeeeeeeeee");
           }
         }
