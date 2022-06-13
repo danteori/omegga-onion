@@ -30,14 +30,14 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
     */
 
     const sleep = (time: number) => new Promise(resolve => setTimeout(resolve, time));
-    let fontSize = 25;
+    let fontSize = 23; //default font size is 18
 
     this.omegga.on('cmd:a',
     async (speaker: string, ...args: string[]) => {
         if(Omegga.getPlayer(speaker).isHost()){
           const player = this.omegga.getPlayer(speaker);
           const message = args.join(' ');
-          Omegga.broadcast(`<size="${fontSize}"><color="${player.getNameColor()}"><b>${player.name}</b></color>: ${message}</size>`);
+          Omegga.broadcast(`<size="${fontSize}"><color="${player.getNameColor()}"><b>${player.name}</b></color>- ${message}</size>`);
           
         }
       });
