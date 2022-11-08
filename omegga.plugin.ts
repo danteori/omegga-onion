@@ -36,8 +36,9 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
     async (speaker: string, ...args: string[]) => {
         if(Omegga.getPlayer(speaker).isHost()){
           const player = this.omegga.getPlayer(speaker);
+          player.takeItem
           const message = args.join(' ');
-          Omegga.broadcast(`<size="${fontSize}"><color="${player.getNameColor()}"><b>${player.name}</b></color>- ${message}</size>`);
+          Omegga.broadcast(`<size="${fontSize}"><color="${player.getNameColor()}"><b>${player.name}</b></color>: ${message}</size>`);
           
         }
       });
